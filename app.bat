@@ -1,3 +1,3 @@
-git add templates/index.html app.py
-git commit -m "Added beautiful website UI"
+git add app.py
+git commit -m "Added home route"
 git push origin main
