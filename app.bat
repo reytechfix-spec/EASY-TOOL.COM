@@ -1,3 +1,3 @@
-git add app.py
-git commit -m "Added home route"
+git add .
+git commit -m "Fixed internal server error"
 git push origin main
