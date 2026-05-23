@@ -1,29 +1,14 @@
-from flask import Flask, render_template, jsonify, request
+# app.py
+import os
+from flask import Flask, jsonify, request, render_template
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
+socketio = SocketIO(app, cors_allowed_origins="*")
 
-# ==================== ADD THIS ROUTE ====================
-@app.route('/')
-def home():
-    return jsonify({
-        "status": "online",
-        "message": "EASY TOOL API is running!",
-        "version": "0.02",
-        "endpoints": {
-            "/": "Home page",
-            "/api/check_adb": "Check ADB devices",
-            "/api/run_command": "Run ADB command",
-            "/api/login": "Login endpoint"
-        }
-    })
-
-# Your other routes...
-@app.route('/api/check_adb')
-def check_adb():
-    # Your code here
-    return jsonify({"status": "ok"})
-
-# ==================== END ====================
+# Weka routes zako hapa...
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get('PORT', 5000))
+    socketio.run(app, host='0.0.0.0', port=port, debug=False)
